@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carlos Gómez",
+    "direccion": "Calle 10 #45-23, Medellín",
+    "lat": 6.2308,
+    "lng": -75.5636,
+    "telefono": "3001234567",
+    "prioridad": "alta",
+    "tipoServicio": "Enfermería",
+    "estado": "pendiente"
+  },
+  {
+    "id": 2,
+    "nombre": "María Rodríguez",
+    "direccion": "Cra 70 #30-15, Medellín",
+    "lat": 6.2445,
+    "lng": -75.5902,
+    "telefono": "3019876543",
+    "prioridad": "media",
+    "tipoServicio": "Fisioterapia",
+    "estado": "pendiente"
+  },
+  {
+    "id": 3,
+    "nombre": "Luis Fernández",
+    "direccion": "Calle 50 #80-10, Medellín",
+    "lat": 6.2701,
+    "lng": -75.6005,
+    "telefono": "3025558899",
+    "prioridad": "alta",
+    "tipoServicio": "Medicina general",
+    "estado": "pendiente"
+  },
+  {
+    "id": 4,
+    "nombre": "Ana Martínez",
+    "direccion": "Cra 43A #1-50, Medellín",
+    "lat": 6.2103,
+    "lng": -75.5678,
+    "telefono": "3002223344",
+    "prioridad": "baja",
+    "tipoServicio": "Control",
+    "estado": "pendiente"
+  },
+  {
+    "id": 5,
+    "nombre": "Jorge Pérez",
+    "direccion": "Calle 33 #65-40, Medellín",
+    "lat": 6.2507,
+    "lng": -75.5851,
+    "telefono": "3014445566",
+    "prioridad": "media",
+    "tipoServicio": "Laboratorio",
+    "estado": "pendiente"
+  }
+]
