@@ -4,35 +4,100 @@ import "leaflet-routing-machine";
 import "leaflet/dist/leaflet.css";
 
 function Mapa({ pacientes = [], ruta = [] }) {
+
   useEffect(() => {
-    const map = L.map("map").setView([6.2442, -75.5812], 13);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap",
-    }).addTo(map);
+    const map = L.map("map").setView(
+      [6.2442, -75.5812],
+      13
+    );
 
-    // Marcadores
-    pacientes.forEach((p) => {
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution: "© OpenStreetMap",
+      }
+    ).addTo(map);
+
+
+    // ===== FUNCIÓN COLOR POR URGENCIA =====
+
+    function obtenerColor(urgencia) {
+
+      if (urgencia >= 5) {
+        return "red";
+      }
+
+      if (urgencia >= 3) {
+        return "orange";
+      }
+
+      return "blue";
+    }
+
+
+    // ===== MOSTRAR SOLO RUTA =====
+
+    ruta.forEach((p) => {
+
       if (p?.lat && p?.lng) {
-        L.marker([p.lat, p.lng]).addTo(map);
+
+        const color = obtenerColor(p.urgencia);
+
+        const icono = L.divIcon({
+          className: "custom-marker",
+          html: `
+            <div style="
+              background:${color};
+              width:18px;
+              height:18px;
+              border-radius:50%;
+              border:3px solid white;
+              box-shadow:0 0 5px rgba(0,0,0,0.5);
+            "></div>
+          `,
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+        });
+
+        L.marker([p.lat, p.lng], {
+          icon: icono
+        })
+          .addTo(map)
+          .bindPopup(`
+            <b>${p.nombre}</b><br/>
+            Prioridad: ${p.prioridad}<br/>
+            Score IA: ${p.score}
+          `);
       }
     });
 
-    // 🔥 RUTA REAL
+
+    // ===== RUTA REAL =====
+
     if (ruta.length >= 2) {
-      const waypoints = ruta.map((p) => L.latLng(p.lat, p.lng));
+
+      const waypoints = ruta.map((p) =>
+        L.latLng(p.lat, p.lng)
+      );
 
       const routingControl = L.Routing.control({
+
         waypoints,
 
-        // 🔥 CLAVE: perfil + config correcta
         router: L.Routing.osrmv1({
-          serviceUrl: "https://router.project-osrm.org/route/v1",
-          profile: "driving", // 🚨 IMPORTANTE
+          serviceUrl:
+            "https://router.project-osrm.org/route/v1",
+          profile: "driving",
         }),
 
         lineOptions: {
-          styles: [{ color: "#0d6efd", weight: 5 }],
+          styles: [
+            {
+              color: "#0d6efd",
+              weight: 5
+            }
+          ],
         },
 
         show: false,
@@ -40,24 +105,44 @@ function Mapa({ pacientes = [], ruta = [] }) {
         draggableWaypoints: false,
         routeWhileDragging: false,
         createMarker: () => null,
+
       }).addTo(map);
 
-      // 🔥 DEBUG CLAVE
-      routingControl.on("routesfound", (e) => {
-        console.log("✅ Ruta por calles generada");
-      });
 
-      routingControl.on("routingerror", (e) => {
-        console.error("❌ OSRM falló:", e);
-      });
+      routingControl.on(
+        "routesfound",
+        () => {
+          console.log(
+            "✅ Ruta inteligente generada"
+          );
+        }
+      );
 
-      map.fitBounds(L.latLngBounds(waypoints));
+      routingControl.on(
+        "routingerror",
+        (e) => {
+          console.error(
+            "❌ Error OSRM:",
+            e
+          );
+        }
+      );
+
+      map.fitBounds(
+        L.latLngBounds(waypoints)
+      );
     }
 
     return () => map.remove();
+
   }, [pacientes, ruta]);
 
-  return <div id="map" style={{ height: "500px" }} />;
+  return (
+    <div
+      id="map"
+      style={{ height: "500px" }}
+    />
+  );
 }
 
 export default Mapa;
