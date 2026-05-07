@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 
 import ControlPanel from "./components/ControlPanel";
-import ResultadoRuta from "./components/ResultadoRuta";
 import Mapa from "./components/Mapa";
-import PacientesList from "./components/PacientesList";
 
 import { useRuta } from "./hooks/useRuta";
 
@@ -38,96 +36,35 @@ function App() {
 
   return (
 
-    <div className="container-fluid px-4 mt-4">
-
+    <div className="container-fluid px-3 px-md-4 gps-app">
       {/* TÍTULO */}
 
-      <h2 className="text-center mb-4">
+      <h2 className="gps-page-title text-center gps-app-title">
 
         Sistema Inteligente de Rutas Médicas
 
       </h2>
 
 
-      {/* PANEL SUPERIOR */}
-
       <ControlPanel
         cargarPacientes={cargarPacientes}
         generarRuta={generarRuta}
         agregarPaciente={agregarPaciente}
+        pacientes={pacientes}
+        editarPaciente={editarPaciente}
+        borrarPaciente={borrarPaciente}
+        listaRuta={listaRuta}
       />
 
 
-      {/* CONTENIDO PRINCIPAL */}
+      <div className="card panel-gps gps-map-stage">
 
-      <div className="row mt-4 g-4">
+        <div className="card-body p-2 gps-map-stage-body">
 
-        {/* IZQUIERDA */}
-
-        <div className="col-lg-4">
-
-          {/* PACIENTES */}
-
-          <div className="card mb-4 shadow-sm border-0">
-
-            <div className="card-header fw-bold">
-
-              Lista de Pacientes
-
-            </div>
-
-            <div className="card-body">
-
-              <PacientesList
-                pacientes={pacientes}
-                editarPaciente={editarPaciente}
-                borrarPaciente={borrarPaciente}
-              />
-
-            </div>
-
-          </div>
-
-
-          {/* RUTA */}
-
-          <div className="card shadow-sm border-0">
-
-            <div className="card-header fw-bold">
-
-              Ruta Generada
-
-            </div>
-
-            <div className="card-body">
-
-              <ResultadoRuta
-                ruta={listaRuta}
-              />
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* DERECHA → MAPA */}
-
-        <div className="col-lg-8">
-
-          <div className="card shadow-sm border-0">
-
-            <div className="card-body p-2">
-
-              <Mapa
-                pacientes={pacientes}
-                ruta={listaRuta}
-              />
-
-            </div>
-
-          </div>
+          <Mapa
+            pacientes={pacientes}
+            ruta={listaRuta}
+          />
 
         </div>
 

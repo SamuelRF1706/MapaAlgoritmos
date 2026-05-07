@@ -27,9 +27,9 @@ function PacientesList({
 
   return (
 
-    <div className="accordion mt-4">
+    <div className="accordion mt-0">
 
-      <div className="accordion-item shadow-sm">
+      <div className="accordion-item gps-accordion-item">
 
         {/* HEADER */}
 
@@ -58,7 +58,7 @@ function PacientesList({
         >
 
           <div
-            className="accordion-body"
+            className="accordion-body gps-scroll"
             style={{
               maxHeight: "500px",
               overflowY: "auto",
@@ -93,7 +93,7 @@ function PacientesList({
 
                     <li
                       key={p.id}
-                      className="list-group-item list-group-item-action"
+                      className="list-group-item list-group-item-action list-group-item-gps"
                       style={{
                         cursor: "pointer"
                       }}
