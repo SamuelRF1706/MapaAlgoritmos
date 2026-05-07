@@ -133,14 +133,34 @@ function Mapa({ pacientes = [], ruta = [] }) {
       );
     }
 
-    return () => map.remove();
+    const invalidate = () => map.invalidateSize();
+
+    let innerRaf = 0;
+
+    const outerRaf = requestAnimationFrame(() => {
+      innerRaf = requestAnimationFrame(invalidate);
+    });
+
+    window.addEventListener("resize", invalidate);
+
+    return () => {
+
+      cancelAnimationFrame(outerRaf);
+
+      if (innerRaf) {
+        cancelAnimationFrame(innerRaf);
+      }
+
+      window.removeEventListener("resize", invalidate);
+
+      map.remove();
+    };
 
   }, [pacientes, ruta]);
 
   return (
     <div
       id="map"
-      style={{ height: "500px" }}
     />
   );
 }

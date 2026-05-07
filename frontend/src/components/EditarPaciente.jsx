@@ -97,7 +97,7 @@ function EditarPaciente({
 
   return (
 
-    <div className="mt-4 border-top pt-4">
+    <div className="mt-4 gps-divider-top pt-4">
 
       <h5 className="mb-3">
 
@@ -240,7 +240,8 @@ function EditarPaciente({
       <div className="d-flex gap-2 mt-4">
 
         <button
-          className="btn btn-secondary w-50"
+          className="btn btn-gps-secondary w-50"
+          type="button"
           onClick={cerrar}
         >
 
@@ -250,7 +251,8 @@ function EditarPaciente({
 
 
         <button
-          className="btn btn-primary w-50"
+          className="btn btn-gps-primary-solid w-50"
+          type="button"
           onClick={guardarCambios}
         >
 

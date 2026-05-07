@@ -161,9 +161,9 @@ function AgregarPaciente({ agregarPaciente }) {
 
   return (
 
-    <div className="mt-4 p-3 bg-light rounded border">
+    <div className="gps-form-inset">
 
-      <h5 className="mb-3 text-primary">
+      <h5 className="mb-3">
 
         Nuevo Paciente
 
@@ -293,7 +293,8 @@ function AgregarPaciente({ agregarPaciente }) {
 
 
       <button
-        className="btn btn-success mt-4 w-100"
+        className="btn btn-gps-success mt-4 w-100"
+        type="button"
         onClick={guardarPaciente}
         disabled={buscando}
       >
