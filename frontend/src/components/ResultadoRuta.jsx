@@ -2,7 +2,7 @@ import React from "react";
 
 function ResultadoRuta({ ruta }) {
   return (
-    <div className="accordion mt-0 mt-xl-2" id="accordionRuta">
+    <div className="accordion mt-0" id="accordionRuta">
       <div className="accordion-item gps-accordion-item">
 
         <h2 className="accordion-header">
